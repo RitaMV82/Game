@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>GAME</title>
+
+<link href="/css/estilos.css" rel="stylesheet" type="text/css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+var obj = new Object();
+
+$(function() {
+	
+	$(document).ready(function(e){
+		  $.ajax({
+		    	 type:"GET",
+		         url : '/score',
+		         dataType: 'json',		       
+		         contentType: "application/json; charset=utf-8",
+		         success : function(res) {		        	 
+		        	 
+		        	 $("#newFila").html('');
+		     			var rowPlayer1 = "<td>" + res.totalRounds + "</td><td>" +
+		     										 res.totalWinPlayer1 + "</td><td>" +     
+		     										 res.totalWinPlayer2 + "</td><td>" +  
+		     										 res.totalDraw + "</td>";
+		      
+		     			$("#newFila").append(rowPlayer1);
+		     		
+		         }
+		      })
+	});
+	
+	$('#buttonBack').click(function(e) {	
+		window.history.back();	
+	});
+   
+   
+});
+
+
+</script>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+  <hr />
+
+  <form name="myForm">
+  
+  <div>
+  	<button type="button" id="buttonBack" class="texto-button">Back</button>
+  </div>
+    
+   
+    <table  border="1" id="myTable">
+            <thead>
+                 <tr class="cabecera-fila cabecera-nombre">
+                    <th>Total Rounds</th>
+                    <th>Total wins player 1</th>      
+                    <th>Total wins player 2</th>               
+                    <th>Total draws</th>
+                </tr>
+             </thead>
+             <tbody>
+             	 <tr id="newFila" class="contenido-texto contenido-columna">
+             	 </tr>
+             </tbody>
+            
+     </table>
+     
+    
+  </form>
+
+</body>
+</html>

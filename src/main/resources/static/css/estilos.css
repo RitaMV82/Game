@@ -1,0 +1,54 @@
+.texto {
+  height: 11px;
+  color: #FF6B33;
+  font-family: Arial;
+  font-size: 12.8px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 14px;
+}
+
+.texto-button {
+  height: 25px;  
+  width: 50px;
+  color: #FF6B33;
+  font-family: Arial;
+  font-size: 12.8px;
+  line-height: 14px;
+  border: 2px solid #FF6B33;
+  white-space:nowrap;
+}
+
+.cabecera-fila {
+  box-sizing: border-box;
+  height: 25px;
+  width: 100%;
+  background-color: #E9E9E9;
+  border: 1px solid #C7C7C7;
+  border-collapse: collapse; 
+}
+
+
+.cabecera-nombre tr {
+  box-sizing: border-box;
+  height: 25px;
+  background-color: #E9E9E9;
+  border: 1px solid #C7C7C7;
+}
+
+.contenido-texto {
+  height: 14px;
+  color: #292B2C;
+  font-family: Arial;
+  font-size: 12.8px;
+  line-height: 14px;
+  padding: 10px;
+}
+
+
+.contenido-columna td {
+  box-sizing: border-box;
+  height: 25px;
+  border: 1px solid #C7C7C7;
+  width: 15%;
+}

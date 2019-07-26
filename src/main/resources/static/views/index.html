@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>GAME</title>
+
+<link href="/css/estilos.css" rel="stylesheet" type="text/css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+var obj = new Object();
+
+
+$(function() {	
+	$(document).ready(function(e){
+		  $.ajax({
+		    	 type:"POST",
+		         url : '/init',
+		         dataType: 'json',		       
+		         contentType: "application/json; charset=utf-8",
+		         success : function(res) {
+		        	 obj = res;
+		        	 if( $("#count").val()>0){
+		        		 res.cont = $("#count").val();
+		        	 }
+		        	 $("#myTable").css("display", "none");
+		         }
+		      })
+	});
+   
+   $('#playGame').click(function(e) {
+      $.ajax({
+    	 type:"POST",
+         url : '/play',         
+         data: JSON.stringify(obj), 
+         dataType: 'json',
+         contentType: "application/json; charset=utf-8",
+         success : function(res) {
+        	 
+        	 obj = res;
+         		
+        	 $("#count").val(res.cont);
+        	 $("#myTable").css("display", "block");
+
+        	
+        	 $("#newFila").html('');
+     			var rowPlayer1 = "<td>" + getDesMove(res.move1) + "</td><td>" +
+     									  getDesMove(res.move2) + "</td><td>" +     
+     									  res.result + "</td>";
+      
+     		    $("#newFila").append(rowPlayer1);
+         }
+      })
+   });
+   
+   $('#buttonClear').click(function(e) {	   
+	      $("#count").val(0);	      
+	      obj.cont = 0;   	
+  	 	  $("#newFila").html('');
+  	 	  
+		  var rowPlayer1 = "<td>" + 0 + "</td><td>" +
+								    0 + "</td><td>" +     
+								  '-' + "</td>";
+		
+		
+		 $("#newFila").append(rowPlayer1);
+	   });
+   
+   $('#buttonNext').click(function(e) {	   
+	   window.location.href="/next";
+	});
+
+	function getDesMove(move){
+		if (move=="R") 
+			return "Rock";
+		if (move=="S")
+			return "Scissors";
+		if	(move=="P")
+			return "Paper";
+	}
+   
+});
+
+
+</script>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+  <hr />
+
+  <form name="myForm">
+    <table>
+      <tr>
+        <td colspan="2" class="texto">Count rounds</td>
+        <td><input id="count" name="count" type="text" class="cont"/></td>
+      </tr> 
+      <tr>        
+        <td><button type="button" id="playGame" class="texto-button">Play</button></td>
+        <td><button type="button" id="buttonClear" class="texto-button">Clear</button></td>
+        <td><button type="button" id="buttonNext"  class="texto-button">Next</button></td>
+        
+      </tr>
+    </table>
+    
+   <br>
+   <br>
+    
+   <div id="myTable" >
+    <table  border="1" >
+            <thead>
+                <tr class="cabecera-fila cabecera-nombre">
+                    <th>1st player chose</th>
+                    <th>2st player chose</th>      
+                    <th>Result</th>
+                </tr>               
+             </thead>
+             <tbody>
+             	 <tr id="newFila" class="contenido-texto contenido-columna">
+             	 </tr>
+             </tbody>            
+     </table>
+    </div> 
+    
+  </form>
+</body>
+</html>
